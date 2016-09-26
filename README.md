@@ -8,3 +8,6 @@ Big boggle with Firebase and VueJS
 
 ### navigate to:
 - localhost:8080
+
+For big boggle dice see:
+https://boardgamegeek.com/thread/300883/letter-distribution
