@@ -88,6 +88,7 @@
   table {
     margin: 5%;
     width: 80%;
+    max-width: 700px;
     background: black;
     border-spacing: 3px;
 
