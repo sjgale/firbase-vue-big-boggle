@@ -1,6 +1,7 @@
 <template lang="html">
+  <div class="boggle-board">
   <table>
-    <tr v-for="row in diceSequence">
+    <tr v-for="row in dice">
       <td v-for="column in row">
         <div class="content">
           <div class="center-letter">{{ column }}</div>
@@ -8,76 +9,18 @@
       </td>
     </tr>
   </table>
+  <button v-on:click="reRoll">Roll</button>
+  </div>
 </template>
 
 <script>
+  import store from '../store'
 
   export default {
-    data () {
-      return {
-        dice: [
-          ['A', 'E', 'A', 'N', 'E', 'G'],
-          ['A', 'H', 'S', 'P', 'C', 'O'],
-          ['A', 'S', 'P', 'F', 'F', 'K'],
-          ['O', 'B', 'J', 'O', 'A', 'B'],
-          ['I', 'O', 'T', 'M', 'U', 'C'],
-          ['R', 'Y', 'V', 'D', 'E', 'L'],
-          ['L', 'R', 'E', 'I', 'X', 'D'],
-          ['E', 'I', 'U', 'N', 'E', 'S'],
-          ['W', 'N', 'G', 'E', 'E', 'H'],
-          ['L', 'N', 'H', 'N', 'R', 'Z'],
-          ['T', 'S', 'T', 'I', 'Y', 'D'],
-          ['O', 'W', 'T', 'O', 'A', 'T'],
-          ['E', 'R', 'T', 'T', 'Y', 'L'],
-          ['T', 'O', 'E', 'S', 'S', 'I'],
-          ['T', 'E', 'R', 'W', 'H', 'V'],
-          ['N', 'U', 'I', 'H', 'M', 'Qu']
-        ]
-      }
-    },
-    computed: {
-      diceSequence () {
-        return this.reRoll()
-        console.log('diceSequecing finished!')
-      }
-    },
+    props: ['dice'],
     methods: {
-      shuffleDice (array) {
-        var currentIndex = array.length, temporaryValue, randomIndex;
-
-        // While there remain elements to shuffle...
-        while (0 !== currentIndex) {
-
-          // Pick a remaining element...
-          randomIndex = Math.floor(Math.random() * currentIndex);
-          currentIndex -= 1;
-
-          // And swap it with the current element.
-          temporaryValue = array[currentIndex];
-          array[currentIndex] = array[randomIndex];
-          array[randomIndex] = temporaryValue;
-        }
-
-        return array;
-      },
-      rollDice (currentDice) {
-        let side = Math.floor(Math.random(1, 7));
-        return currentDice[side];
-      },
-      organizeDice (dice) {
-        console.log(dice)
-        let rows = [[],[],[],[]]
-
-        dice.forEach(function (current, index) {
-          let destinationRow = Math.floor(index/4)
-          rows[destinationRow].push(current)
-        })
-
-        return rows
-      },
       reRoll () {
-        let dice = this.shuffleDice(this.dice.map(this.rollDice))
-        return this.organizeDice(dice)
+        store.setDiceSequence()
       }
     }
   }

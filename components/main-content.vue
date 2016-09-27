@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="main-content">
-    <boggle-board></boggle-board>
+    <boggle-board v-bind:dice="dice"></boggle-board>
   </div>
 </template>
 
@@ -8,6 +8,7 @@
 import BoggleBoard from './boggle-board.vue'
 
 export default {
+  props: ['dice'],
   methods: {},
   components: {
     BoggleBoard

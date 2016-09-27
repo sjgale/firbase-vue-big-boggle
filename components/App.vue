@@ -1,25 +1,43 @@
 <template>
   <div id="app">
     <sidebar></sidebar>
-    <main-content></main-content>
+    <main-content v-bind:dice="dice"></main-content>
   </div>
 </template>
 
 <script>
-import Sidebar from './sidebar.vue'
-import MainContent from './main-content.vue'
+  import store from '../store'
+  import Sidebar from './sidebar.vue'
+  import MainContent from './main-content.vue'
 
-export default {
-  data () {
-    return {
-      title: "Big Boggle"
+  export default {
+
+    components: {
+      Sidebar,
+      MainContent
+    },
+
+    data () {
+      return {
+        title: "Big Boggle",
+        dice: []
+      }
+    },
+
+    created () {
+      // assign the event handler 'updateBoggleBoard' to the 'data-updated' event
+      store.on('data-updated', this.updateBoggleBoard)
+    },
+
+    methods: {
+      updateBoggleBoard (boggleData) {
+        console.log("Boggle board updating.")
+        this.dice = boggleData
+      }
     }
-  },
-  components: {
-    Sidebar,
-    MainContent
+
   }
-}
+
 </script>
 
 <style lang="css">
