@@ -21,7 +21,7 @@ export default {
   .sidebar {
     height: 100%;
     display: inline-block;
-    background: darkSlateGray;
+    background: #557B83;
     position: fixed;
     top:0;
     left: 0;

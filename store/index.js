@@ -21,7 +21,6 @@ db.ref().on('value', (snapshot) => {
   var gameData = snapshot.val()
   if (gameData) {
     boggleData = gameData.boggle['default'].sequence
-    console.log(boggleData)
     store.emit('data-updated', boggleData)
   }
 })
@@ -33,7 +32,10 @@ store.setDiceSequence = function () {
 
   //update firebase db, as wel as local state
   db.ref('boggle/' + gameID + '/sequence').set(boggleData)
-  store.emit('data-updated', boggleData)
+}
+
+store.setTimer = function () {
+  return ''
 }
 
 export default store
